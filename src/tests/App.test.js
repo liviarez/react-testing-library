@@ -48,4 +48,4 @@ describe('Testa o componente <App.js />', () => {
   });
 });
 
-// Referencia do course da Trybe. Dia 03. Testes no Router.
+// Referencia do course da Trybe. Dia 03. Escrevendo os testes da aplicacao.
