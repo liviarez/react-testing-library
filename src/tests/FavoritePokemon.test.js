@@ -1,15 +1,45 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import { FavoritePokemon } from '../pages';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
+import App from '../App';
 
-describe('Testa o componente <FavoritePokemon.js />', () => {
-  it('Teste se é exibida na tela a mensagem No favorite pokemon found, caso a pessoa não tenha Pokémon favoritos;', () => {
-    renderWithRouter(<FavoritePokemon />);
-    const notFoundPokemon = screen.getByText(/No favorite pokémon found/i);
-    expect(notFoundPokemon).toBeInTheDocument();
-  });
+describe('Teste o componente <FavoritePokemons.js />', () => {
+  it(
+    'Testa se é exibida na tela a mensagem No favorite pokemon found',
+    () => {
+      renderWithRouter(<App />);
 
-  it('Teste se apenas são exibidos os Pokémon favoritados.', () => {
-  });
+      const favoriteLink = screen.getByRole('link', {
+        name: /favorite pokémon/i,
+      });
+
+      userEvent.click(favoriteLink);
+
+      const defaultFavoriteText = screen.getByText('No favorite pokemon found');
+      expect(defaultFavoriteText).toBeInTheDocument();
+    },
+  );
+
+  it(
+    'Teste se apenas são exibidos os Pokémon favoritados.',
+    () => {
+      renderWithRouter(<App />);
+
+      const details = screen.getByRole('link', { name: /more details/i });
+
+      userEvent.click(details);
+      const favoritePokemonChecckbox = screen
+        .getByRole('checkbox', { name: /pokémon favoritado/i });
+
+      userEvent.click(favoritePokemonChecckbox);
+
+      const favoriteLink = screen.getByRole('link', { name: /favorite pokémons/i });
+      userEvent.click(favoriteLink);
+
+      const pokemon = screen.getByText(/pikachu/i);
+
+      expect(pokemon).toBeInTheDocument();
+    },
+  );
 });
