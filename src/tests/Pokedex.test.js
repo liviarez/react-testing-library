@@ -45,24 +45,25 @@ describe('Testa o componente <Pokedex.js />', () => {
   it('Teste se a Pokédex tem os botões de filtro', () => {
     renderWithRouter(<App />);
 
-    expect(screen.getByRole(
-      'button',
-      { name: /all/i },
-    )).not.toHaveAttribute('data-testid', 'pokemon-type-button');
+    const allButton = screen.getByRole('button', { name: /all/i });
+    expect(allButton).toBeInTheDocument();
+    userEvent.click(allButton);
 
-    expect(screen.getByRole(
-      'button',
-      { name: /electric/i },
-    )).toHaveAttribute('data-testid', 'pokemon-type-button');
+    const electricPokemon = screen.getByText(/pikachu/i);
+    expect(electricPokemon).toBeInTheDocument();
+
+    const fireButton = screen.getByRole('button', { name: /fire/i });
+    expect(fireButton).toBeInTheDocument();
+    userEvent.click(fireButton);
+    const charmander = screen.getByText(/charmander/i);
+    expect(charmander).toBeInTheDocument();
   });
 
   it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
     renderWithRouter(<App />);
 
-    const pokemonName = screen.getByText(/Pikachu/i);
     const allButton = screen.getByRole('button', { name: /all/i });
     expect(allButton).toBeInTheDocument();
     userEvent.click(allButton);
-    expect(pokemonName).toBeInTheDocument();
   });
 });
