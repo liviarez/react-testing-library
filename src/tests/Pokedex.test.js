@@ -49,14 +49,22 @@ describe('Testa o componente <Pokedex.js />', () => {
     expect(allButton).toBeInTheDocument();
     userEvent.click(allButton);
 
-    const electricPokemon = screen.getByText(/pikachu/i);
-    expect(electricPokemon).toBeInTheDocument();
+    const buttonPokemonType = screen.getAllByTestId('pokemon-type-button');
+    expect(buttonPokemonType).toHaveLength(7);
 
-    const fireButton = screen.getByRole('button', { name: /fire/i });
-    expect(fireButton).toBeInTheDocument();
-    userEvent.click(fireButton);
-    const charmander = screen.getByText(/charmander/i);
-    expect(charmander).toBeInTheDocument();
+    userEvent.click(buttonPokemonType[0]);
+
+    const eletricPokemon = screen.getByText('Pikachu');
+    expect(eletricPokemon).toBeInTheDocument();
+
+    userEvent.click(buttonPokemonType[1]);
+    const firePokemon = screen.getByText('Charmander');
+    expect(firePokemon).toBeInTheDocument();
+
+    const nextPokemonName = screen.getByRole('button', { name: 'Próximo Pokémon' });
+    userEvent.click(nextPokemonName);
+    const rapidash = screen.getByText('Rapidash');
+    expect(rapidash).toBeInTheDocument();
   });
 
   it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
