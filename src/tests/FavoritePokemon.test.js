@@ -39,3 +39,5 @@ describe('Teste o componente <FavoritePokemons.js />', () => {
     },
   );
 });
+
+// Ajuda na mentoria. Dia 14/06 às 9 horas.
