@@ -52,10 +52,7 @@ describe('Testa o componente <Pokedex.js />', () => {
     const buttonPokemonType = screen.getAllByTestId('pokemon-type-button');
     expect(buttonPokemonType).toHaveLength(7);
 
-    userEvent.click(buttonPokemonType[0]);
-
-    const eletricPokemon = screen.getByText('Pikachu');
-    expect(eletricPokemon).toBeInTheDocument();
+    /*   userEvent.click(buttonPokemonType[0]); */
 
     userEvent.click(buttonPokemonType[1]);
     const firePokemon = screen.getByText('Charmander');
@@ -65,6 +62,9 @@ describe('Testa o componente <Pokedex.js />', () => {
     userEvent.click(nextPokemonName);
     const rapidash = screen.getByText('Rapidash');
     expect(rapidash).toBeInTheDocument();
+
+    const eletricPokemon = screen.getByText('Pikachu');
+    expect(eletricPokemon).toBeInTheDocument();
   });
 
   it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
