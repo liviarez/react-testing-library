@@ -64,6 +64,7 @@ describe('Testa o componente <Pokedex.js />', () => {
     expect(rapidash).toBeInTheDocument();
 
     const eletricPokemon = screen.getByText('Pikachu');
+    userEvent.click(eletricPokemon);
     expect(eletricPokemon).toBeInTheDocument();
   });
 
