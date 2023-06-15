@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
-import { Pokemon } from '../components';
 
 describe('Teste o componente <Pokemon.js />', () => {
   it('Teste se é renderizado um card com as informações de determinado Pokémon', () => {
