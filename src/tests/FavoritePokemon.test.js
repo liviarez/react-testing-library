@@ -3,20 +3,15 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
+import { FavoritePokemon } from '../pages';
 
 describe('Teste o componente <FavoritePokemons.js />', () => {
   it(
     'Testa se é exibida na tela a mensagem No favorite pokemon found',
     () => {
-      renderWithRouter(<App />);
+      renderWithRouter(<FavoritePokemon />);
 
-      const favoriteLink = screen.getByRole('link', {
-        name: /favorite pokémon/i,
-      });
-
-      userEvent.click(favoriteLink);
-
-      const defaultFavoriteText = screen.getByText('No favorite pokemon found');
+      const defaultFavoriteText = screen.getByText('No favorite Pokémon found');
       expect(defaultFavoriteText).toBeInTheDocument();
     },
   );
@@ -26,7 +21,7 @@ describe('Teste o componente <FavoritePokemons.js />', () => {
     () => {
       renderWithRouter(<App />);
 
-      const details = screen.getByRole('link', { name: /more details/i });
+      const details = screen.getByRole('link', { name: 'More details' });
 
       userEvent.click(details);
       const favoritePokemonChecckbox = screen
@@ -34,12 +29,13 @@ describe('Teste o componente <FavoritePokemons.js />', () => {
 
       userEvent.click(favoritePokemonChecckbox);
 
-      const favoriteLink = screen.getByRole('link', { name: /favorite pokémons/i });
+      const favoriteLink = screen.getByRole('link', { name: 'Favorite Pokémon' });
       userEvent.click(favoriteLink);
 
       const pokemon = screen.getByText(/pikachu/i);
 
       expect(pokemon).toBeInTheDocument();
+      expect(screen.queryByText(/No favorite Pokémon found/i)).not.toBeInTheDocument();
     },
   );
 });
