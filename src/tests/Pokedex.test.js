@@ -52,9 +52,7 @@ describe('Testa o componente <Pokedex.js />', () => {
     const buttonPokemonType = screen.getAllByTestId('pokemon-type-button');
     expect(buttonPokemonType).toHaveLength(7);
 
-    /*   userEvent.click(buttonPokemonType[0]); */
-
-    userEvent.click(buttonPokemonType[1]);
+    userEvent.click(screen.getByRole('button', { name: 'Fire' }));
     const firePokemon = screen.getByText('Charmander');
     expect(firePokemon).toBeInTheDocument();
 
@@ -62,9 +60,10 @@ describe('Testa o componente <Pokedex.js />', () => {
     userEvent.click(nextPokemonName);
     const rapidash = screen.getByText('Rapidash');
     expect(rapidash).toBeInTheDocument();
+    userEvent.click(allButton);
 
     const eletricPokemon = screen.getByText('Pikachu');
-    userEvent.click(eletricPokemon);
+    /*  userEvent.click(eletricPokemon); */
     expect(eletricPokemon).toBeInTheDocument();
   });
 
